@@ -10,7 +10,6 @@ import javax.persistence.Id;
 import javax.transaction.Transactional;
 
 @Entity
-@Transactional
 @Getter
 @Setter
 public class Author {

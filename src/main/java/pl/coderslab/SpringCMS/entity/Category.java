@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.transaction.Transactional;
 
 @Entity
-@Transactional
+
 @Getter
 @Setter
 public class Category {

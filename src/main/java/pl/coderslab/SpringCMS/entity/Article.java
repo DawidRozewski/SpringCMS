@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Transactional
 @Getter
 @Setter
 public class Article {
@@ -27,6 +26,7 @@ public class Article {
     @OneToMany
     private List<Category> categories = new ArrayList<>();
 
+    private String content;
     private LocalDateTime created;
     private LocalDateTime updated;
 

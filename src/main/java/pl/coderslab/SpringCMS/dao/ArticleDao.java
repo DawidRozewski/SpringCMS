@@ -1,0 +1,33 @@
+package pl.coderslab.SpringCMS.dao;
+
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import pl.coderslab.SpringCMS.entity.Article;
+
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+@Repository
+@Transactional
+public class ArticleDao {
+
+    @PersistenceContext
+    EntityManager entityManager;
+
+    public void persist(Article article) {
+        entityManager.persist(article);
+    }
+
+    public void merge(Article article) {
+        entityManager.merge(article);
+    }
+
+    public Article findById(long id) {
+        return entityManager.find(Article.class, id);
+    }
+
+    public void remove(long id) {
+        Article article = findById(id);
+        entityManager.remove(entityManager.contains(article) ? article : entityManager.merge(article));
+    }
+}
