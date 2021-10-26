@@ -33,4 +33,5 @@ public class CategoryDao {
         Query query = entityManager.createQuery("SELECT c FROM Category c");
         return query.getResultList();
     }
+
 }

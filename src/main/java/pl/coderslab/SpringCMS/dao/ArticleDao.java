@@ -37,4 +37,10 @@ public class ArticleDao {
         Query query = entityManager.createQuery("SELECT a from Article a");
         return query.getResultList();
     }
+
+    public List<Article> getLastFiveArticles() {
+        Query query = entityManager.createQuery("SELECT a FROM Article a");
+        query.setMaxResults(5);
+        return query.getResultList();
+    }
 }
