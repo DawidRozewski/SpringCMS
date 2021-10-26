@@ -5,6 +5,8 @@ import pl.coderslab.SpringCMS.entity.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
+import java.util.List;
 
 public class CategoryDao {
     @PersistenceContext
@@ -25,5 +27,10 @@ public class CategoryDao {
     public void remove(long id) {
         Category category = findById(id);
         entityManager.remove(entityManager.contains(category) ? category : entityManager.merge(category));
+    }
+
+    public List<Category> findAll() {
+        Query query = entityManager.createQuery("SELECT c FROM Category c");
+        return query.getResultList();
     }
 }
