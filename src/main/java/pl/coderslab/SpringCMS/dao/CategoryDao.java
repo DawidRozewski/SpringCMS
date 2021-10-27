@@ -1,5 +1,7 @@
 package pl.coderslab.SpringCMS.dao;
 
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.SpringCMS.entity.Article;
 import pl.coderslab.SpringCMS.entity.Category;
 
@@ -7,7 +9,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.util.List;
-
+@Repository
+@Transactional
 public class CategoryDao {
     @PersistenceContext
     EntityManager entityManager;
