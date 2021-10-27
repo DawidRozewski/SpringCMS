@@ -3,6 +3,7 @@
 <h2>Add new category</h2>
 
 <form:form modelAttribute="category">
+    <form:hidden path="id"/>
     Name: <form:input path="name"/><br/>
     Description: <form:input path="description"/><br/>
     <input type="submit" value="Save"> <br/>

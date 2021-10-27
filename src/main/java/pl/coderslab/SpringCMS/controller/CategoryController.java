@@ -2,10 +2,7 @@ package pl.coderslab.SpringCMS.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.SpringCMS.dao.CategoryDao;
 import pl.coderslab.SpringCMS.entity.Category;
 
@@ -34,8 +31,20 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public String saveCategory(@ModelAttribute("category") Category category) {
+    public String save(@ModelAttribute("category") Category category) {
         categoryDao.persist(category);
+        return "redirect:/category/all";
+    }
+
+    @GetMapping("/edit")
+    public String prepareToEdit(@RequestParam long id, Model model) {
+        model.addAttribute("category", categoryDao.findById(id));
+        return "/category/addForm";
+    }
+
+    @PostMapping("/edit")
+    public String merge(@ModelAttribute("category") Category category) {
+        categoryDao.merge(category);
         return "redirect:/category/all";
     }
 

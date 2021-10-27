@@ -20,14 +20,16 @@
         <th>Id</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Edit / Delete</th>
     </tr>
 
-    <%--@elvariable id="smurfs" type="java.util.List"--%>
     <c:forEach var="c" items="${categories}">
         <tr>
             <td>${c.id}</td>
             <td>${c.name}</td>
             <td>${c.description}</td>
+            <td><a href="edit?id=${c.id}">Edit</a>
+                <a href="delete/${c.id}">Delete</a> </td>
         </tr>
     </c:forEach>
 
