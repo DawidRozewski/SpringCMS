@@ -19,7 +19,7 @@ public class CategoryController {
     }
 
     @GetMapping("/all")
-    public String getAllCategories(Model model){
+    public String getAllCategories(Model model) {
         model.addAttribute("categories", categoryDao.findAll());
         return "/category/showAll";
     }
@@ -48,6 +48,19 @@ public class CategoryController {
         return "redirect:/category/all";
     }
 
+    @GetMapping("/remove")
+    public String prepareToRemove(@RequestParam long id, Model model) {
+        model.addAttribute("category", categoryDao.findById(id));
+        return "category/remove";
+    }
+
+    @PostMapping("/remove")
+    public String remove(@RequestParam String confirmed, @RequestParam long id) {
+        if ("yes".equals(confirmed)) {
+            categoryDao.remove(id);
+        }
+        return "redirect:/category/all";
+    }
 
 
 }

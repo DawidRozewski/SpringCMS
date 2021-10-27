@@ -29,7 +29,7 @@
             <td>${c.name}</td>
             <td>${c.description}</td>
             <td><a href="edit?id=${c.id}">Edit</a>
-                <a href="delete/${c.id}">Delete</a> </td>
+                <a href="remove?id=${c.id}">Delete</a> </td>
         </tr>
     </c:forEach>
 
