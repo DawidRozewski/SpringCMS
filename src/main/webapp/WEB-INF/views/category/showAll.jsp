@@ -32,5 +32,7 @@
     </c:forEach>
 
 </table>
+<p>
+    <a href="/category/add">Add new category</a><br/></p>
 
 </body>
