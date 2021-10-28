@@ -46,6 +46,12 @@ public class AuthorController {
         return "redirect:/author/all";
     }
 
+    @GetMapping("/remove")
+    public String prepareToRemove(@RequestParam long id, Model model) {
+        model.addAttribute("author", authorDao.findById(id));
+        return "/author/remove";
+    }
+
     
 
 }
