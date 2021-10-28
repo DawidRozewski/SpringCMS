@@ -49,7 +49,15 @@ public class AuthorController {
     @GetMapping("/remove")
     public String prepareToRemove(@RequestParam long id, Model model) {
         model.addAttribute("author", authorDao.findById(id));
-        return "/author/remove";
+        return "author/remove";
+    }
+
+    @PostMapping("/remove")
+    public String remove(@RequestParam String confirmed, @RequestParam long id) {
+        if("yes".equals(confirmed)){
+            authorDao.remove(id);
+        }
+        return "redirect:/author/all";
     }
 
     
