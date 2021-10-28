@@ -2,10 +2,7 @@ package pl.coderslab.SpringCMS.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.SpringCMS.dao.AuthorDao;
 import pl.coderslab.SpringCMS.entity.Author;
 
@@ -36,5 +33,19 @@ public class AuthorController {
         authorDao.persist(author);
         return "redirect:/author/all";
     }
+
+    @GetMapping("/edit")
+    public String prepareToEdit(@RequestParam long id, Model model) {
+        model.addAttribute("author", authorDao.findById(id));
+        return "/author/add";
+    }
+
+    @PostMapping("/edit")
+    public String merge(@ModelAttribute("author") Author author) {
+        authorDao.merge(author);
+        return "redirect:/author/all";
+    }
+
+    
 
 }
