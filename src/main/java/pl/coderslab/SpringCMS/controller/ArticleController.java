@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.SpringCMS.dao.ArticleDao;
 import pl.coderslab.SpringCMS.dao.AuthorDao;
 import pl.coderslab.SpringCMS.dao.CategoryDao;
+import pl.coderslab.SpringCMS.entity.Article;
 
 @Controller
 @RequestMapping("/article")
@@ -27,6 +28,15 @@ public class ArticleController {
         model.addAttribute("articles", articleDao.findAll());
         return "article/all";
     }
+
+    @GetMapping("/add")
+    public String add(Model model) {
+        model.addAttribute("article", new Article());
+        return "/article/add";
+    }
+
+
+
 
 
 

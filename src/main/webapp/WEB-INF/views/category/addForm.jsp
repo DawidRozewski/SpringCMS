@@ -6,7 +6,7 @@
     <form:hidden path="id"/>
     Name: <form:input path="name"/><br/>
     Description: <form:input path="description"/><br/>
-    <input type="submit" value="Save"> <br/>
+    <input type="submit" value="Zapisz"> <br/>
 </form:form>
 
 <a href="/category/all">Show all categories</a><br/>
