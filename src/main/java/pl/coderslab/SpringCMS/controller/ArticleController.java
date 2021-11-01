@@ -32,7 +32,7 @@ public class ArticleController {
     @GetMapping("/add")
     public String add(Model model) {
         model.addAttribute("article", new Article());
-        return "/article/add";
+        return "article/add";
     }
 
 

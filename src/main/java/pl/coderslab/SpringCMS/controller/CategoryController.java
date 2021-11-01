@@ -21,13 +21,13 @@ public class CategoryController {
     @GetMapping("/all")
     public String getAllCategories(Model model) {
         model.addAttribute("categories", categoryDao.findAll());
-        return "/category/showAll";
+        return "category/showAll";
     }
 
     @GetMapping("/add")
     public String showAddForm(Model model) {
         model.addAttribute("category", new Category());
-        return "/category/addForm";
+        return "category/addForm";
     }
 
     @PostMapping("/add")
@@ -39,7 +39,7 @@ public class CategoryController {
     @GetMapping("/edit")
     public String prepareToEdit(@RequestParam long id, Model model) {
         model.addAttribute("category", categoryDao.findById(id));
-        return "/category/addForm";
+        return "category/addForm";
     }
 
     @PostMapping("/edit")
@@ -61,6 +61,5 @@ public class CategoryController {
         }
         return "redirect:/category/all";
     }
-
 
 }

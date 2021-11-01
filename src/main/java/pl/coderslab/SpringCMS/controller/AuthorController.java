@@ -19,13 +19,13 @@ public class AuthorController {
     @GetMapping("/all")
     public String showAuthors(Model model) {
         model.addAttribute("authors", authorDao.findAll());
-        return "/author/all";
+        return "author/all";
     }
 
     @GetMapping("/add")
     public String addForm(Model model) {
         model.addAttribute("author", new Author());
-        return "/author/add";
+        return "author/add";
     }
 
     @PostMapping("/add")
@@ -37,7 +37,7 @@ public class AuthorController {
     @GetMapping("/edit")
     public String prepareToEdit(@RequestParam long id, Model model) {
         model.addAttribute("author", authorDao.findById(id));
-        return "/author/add";
+        return "author/add";
     }
 
     @PostMapping("/edit")
