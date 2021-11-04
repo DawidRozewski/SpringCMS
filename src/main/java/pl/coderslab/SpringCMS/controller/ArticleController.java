@@ -32,29 +32,35 @@ public class ArticleController {
     @GetMapping("/all")
     public String showAll(Model model) {
         model.addAttribute("articles", articleDao.findAll());
-        return "article/all";
+        return "/article/all";
     }
 
     @GetMapping("/add")
     public String prepareToAdd(Model model) {
         model.addAttribute("article", new Article());
-        return "article/add";
+        return "/article/add";
     }
 
     @PostMapping("/add")
     public String save(@ModelAttribute("article") Article article) {
         articleDao.persist(article);
         return "redirect:/article/all";
+
     }
+
+
+
+
+
 
     @ModelAttribute("authors")
     public List<Author> authorList() {
-        return this.authorDao.findAll();
+        return authorDao.findAll();
     }
 
     @ModelAttribute("categories")
-    public List<Category> categories() {
-        return this.categoryDao.findAll();
+    public List<Category> categoryList() {
+        return categoryDao.findAll();
     }
 
 }

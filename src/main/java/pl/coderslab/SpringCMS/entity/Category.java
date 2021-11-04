@@ -4,7 +4,6 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.lang.Nullable;
 import javax.persistence.*;
-import javax.transaction.Transactional;
 
 @Entity
 
@@ -12,6 +11,7 @@ import javax.transaction.Transactional;
 @Setter
 @ToString
 public class Category {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
