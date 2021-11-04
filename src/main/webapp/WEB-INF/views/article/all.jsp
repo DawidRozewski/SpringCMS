@@ -46,6 +46,6 @@
 
 </table>
 <p>
-    <a href="/author/add">Add new author</a><br/></p>
+    <a href="/article/add">Add new article</a><br/></p>
 
 </body>
