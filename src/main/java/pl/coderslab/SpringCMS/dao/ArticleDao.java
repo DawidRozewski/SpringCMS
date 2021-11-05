@@ -19,9 +19,9 @@ public class ArticleDao {
     EntityManager entityManager;
 
     public void persist(Article article) {
-        LocalDateTime now = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        article.setCreated(LocalDateTime.parse(now.format(formatter)));
+//        LocalDateTime now = LocalDateTime.now();
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        article.setCreated(LocalDateTime.now());
         entityManager.persist(article);
     }
 
