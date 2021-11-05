@@ -49,7 +49,6 @@ public class ArticleController {
         return "redirect:/article/all";
     }
 
-
     @GetMapping("/edit")
     public String prepareToEdit(@RequestParam long id, Model model) {
         model.addAttribute("article", articleDao.findById(id));
@@ -62,14 +61,17 @@ public class ArticleController {
         return "redirect:/article/all";
     }
 
+    @GetMapping("/remove")
+    public String prepareToRemove(@RequestParam long id, Model model) {
+        model.addAttribute("article", articleDao.findById(id));
+        return "/article/remove";
+    }
 
-
-
-
-
-
-
-
+    @PostMapping("/remove")
+    public String remove(@RequestParam String confirmed, @RequestParam long id) {
+        articleDao.remove(id);
+        return "redirect:/article/all";
+    }
 
 
     @ModelAttribute("now")
