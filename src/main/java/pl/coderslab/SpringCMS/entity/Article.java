@@ -2,11 +2,8 @@ package pl.coderslab.SpringCMS.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -26,7 +23,7 @@ public class Article {
     @ManyToOne
     private Author author;
 
-    @OneToMany
+    @ManyToMany
     private List<Category> categories = new ArrayList<>();
 
     private String content;

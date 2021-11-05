@@ -9,4 +9,4 @@
     <input type="submit" value="Save"> <br/>
 </form:form>
 
-<a href="/all">Show all authors</a><br/>
+<a href="/author/all">Show all authors</a><br/>
