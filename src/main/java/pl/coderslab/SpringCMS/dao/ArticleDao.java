@@ -19,14 +19,10 @@ public class ArticleDao {
     EntityManager entityManager;
 
     public void persist(Article article) {
-//        LocalDateTime now = LocalDateTime.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        article.setCreated(LocalDateTime.now());
         entityManager.persist(article);
     }
 
     public void merge(Article article) {
-        article.setUpdated(LocalDateTime.now());
         entityManager.merge(article);
     }
 
