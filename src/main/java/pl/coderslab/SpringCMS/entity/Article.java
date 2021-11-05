@@ -20,7 +20,7 @@ public class Article {
     @Column(length = 200)
     private String title;
 
-    @OneToOne
+    @ManyToOne
     private Author author;
 
     @OneToMany
@@ -29,6 +29,5 @@ public class Article {
     private String content;
     private LocalDateTime created;
     private LocalDateTime updated;
-
 
 }
