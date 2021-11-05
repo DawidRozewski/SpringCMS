@@ -4,8 +4,8 @@
 
 <form:form modelAttribute="author">
     <form:hidden path="id"/>
-    Name: <form:input path="firstName"/><br/>
-    Description: <form:input path="lastName"/><br/>
+    FirstName: <form:input path="firstName"/><br/>
+    LastName: <form:input path="lastName"/><br/>
     <input type="submit" value="Save"> <br/>
 </form:form>
 

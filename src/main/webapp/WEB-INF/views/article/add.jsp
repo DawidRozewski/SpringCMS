@@ -10,5 +10,3 @@
     <label> Content: <form:input path="content"/></label><br/>
     <input type="submit" value="Save"><br/>
 </form:form>
-
-//Zrobic Converter dla CategoryDao

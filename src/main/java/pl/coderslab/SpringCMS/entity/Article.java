@@ -12,11 +12,11 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@ToString
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @Column(length = 200)
     private String title;
 

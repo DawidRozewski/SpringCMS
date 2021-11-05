@@ -1,11 +1,9 @@
 package pl.coderslab.SpringCMS.controller;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.SpringCMS.dao.ArticleDao;
 import pl.coderslab.SpringCMS.dao.AuthorDao;
 import pl.coderslab.SpringCMS.dao.CategoryDao;
@@ -13,6 +11,7 @@ import pl.coderslab.SpringCMS.entity.Article;
 import pl.coderslab.SpringCMS.entity.Author;
 import pl.coderslab.SpringCMS.entity.Category;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -42,16 +41,41 @@ public class ArticleController {
     }
 
     @PostMapping("/add")
-    public String save(@ModelAttribute("article") Article article) {
+    public String save(@ModelAttribute("article") Article article,
+                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime now) {
+
+        article.setCreated(now);
         articleDao.persist(article);
         return "redirect:/article/all";
+    }
 
+
+    @GetMapping("/edit")
+    public String prepareToEdit(@RequestParam long id, Model model) {
+        model.addAttribute("article", articleDao.findById(id));
+        return "/article/add";
+    }
+
+    @PostMapping("/edit")
+    public String merge(@ModelAttribute("article") Article article) {
+        articleDao.merge(article);
+        return "redirect:/article/all";
     }
 
 
 
 
 
+
+
+
+
+
+
+    @ModelAttribute("now")
+    public LocalDateTime now() {
+        return LocalDateTime.now();
+    }
 
     @ModelAttribute("authors")
     public List<Author> authorList() {
