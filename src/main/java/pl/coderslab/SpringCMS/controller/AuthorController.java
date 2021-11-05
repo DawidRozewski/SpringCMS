@@ -54,12 +54,11 @@ public class AuthorController {
 
     @PostMapping("/remove")
     public String remove(@RequestParam String confirmed, @RequestParam long id) {
-        if("yes".equals(confirmed)){
+        if ("yes".equals(confirmed)) {
             authorDao.remove(id);
         }
         return "redirect:/author/all";
     }
 
-    
 
 }

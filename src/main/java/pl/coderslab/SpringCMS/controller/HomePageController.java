@@ -16,8 +16,8 @@ public class HomePageController {
 
     @GetMapping("/")
     public String home(Model model) {
-      model.addAttribute("articles", articleDao.getLastFiveArticles());
-      return "articles";
+        model.addAttribute("articles", articleDao.getLastFiveArticles());
+        return "articles";
     }
 
 }
