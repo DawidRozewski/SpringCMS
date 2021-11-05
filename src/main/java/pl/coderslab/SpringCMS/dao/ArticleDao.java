@@ -26,6 +26,7 @@ public class ArticleDao {
     }
 
     public void merge(Article article) {
+        article.setUpdated(LocalDateTime.now());
         entityManager.merge(article);
     }
 
