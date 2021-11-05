@@ -7,6 +7,8 @@ import pl.coderslab.SpringCMS.entity.Article;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Repository
@@ -17,6 +19,9 @@ public class ArticleDao {
     EntityManager entityManager;
 
     public void persist(Article article) {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        article.setCreated(LocalDateTime.parse(now.format(formatter)));
         entityManager.persist(article);
     }
 

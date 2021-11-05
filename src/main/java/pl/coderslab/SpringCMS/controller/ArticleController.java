@@ -41,10 +41,8 @@ public class ArticleController {
     }
 
     @PostMapping("/add")
-    public String save(@ModelAttribute("article") Article article,
-                       @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime now) {
-
-        article.setCreated(now);
+    public String save(@ModelAttribute("article") Article article) {
+//        article.setCreated(LocalDateTime.now());
         articleDao.persist(article);
         return "redirect:/article/all";
     }
@@ -69,10 +67,11 @@ public class ArticleController {
 
     @PostMapping("/remove")
     public String remove(@RequestParam String confirmed, @RequestParam long id) {
-        articleDao.remove(id);
+        if ("yes".equals(confirmed)) {
+            articleDao.remove(id);
+        }
         return "redirect:/article/all";
     }
-
 
     @ModelAttribute("now")
     public LocalDateTime now() {

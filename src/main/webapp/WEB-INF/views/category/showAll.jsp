@@ -9,6 +9,7 @@
             border: 1px solid black;
             padding: 5px;
         }
+
         th {
             background-color: #ccc;
         }
@@ -29,12 +30,17 @@
             <td>${c.name}</td>
             <td>${c.description}</td>
             <td><a href="edit?id=${c.id}">Edit</a>
-                <a href="remove?id=${c.id}">Delete</a> </td>
+                <a href="remove?id=${c.id}">Delete</a></td>
         </tr>
     </c:forEach>
 
 </table>
 <p>
+    <a href="/article/add">Add new article</a><br/></p>
+    <a href="/author/add">Add new author</a><br/></p>
     <a href="/category/add">Add new category</a><br/></p>
+
+    <strong><a href="/article/all"> Articles </a> </strong><br/>
+    <strong><a href="/author/all"> Authors </a></strong><br/>
 
 </body>

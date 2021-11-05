@@ -35,6 +35,11 @@
 
 </table>
 <p>
+    <a href="/article/add">Add new article</a><br/></p>
     <a href="/author/add">Add new author</a><br/></p>
+    <a href="/category/add">Add new category</a><br/></p>
+
+    <strong><a href="/article/all"> Articles </a> </strong><br/>
+    <strong><a href="/category/all"> Categories </a> </strong><br/>
 
 </body>

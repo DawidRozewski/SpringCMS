@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" %>
 <h2>Czy chcesz usunac autora ${author.firstName} ${author.lastName} ?</h2>
 
 <form method="post">
