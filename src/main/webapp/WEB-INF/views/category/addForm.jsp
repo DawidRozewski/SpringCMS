@@ -5,7 +5,10 @@
 <form:form modelAttribute="category">
     <form:hidden path="id"/>
     Name: <form:input path="name"/><br/>
+    <form:errors path="name"/><br/>
+
     Description: <form:input path="description"/><br/>
+
     <input type="submit" value="Zapisz"> <br/>
 </form:form>
 

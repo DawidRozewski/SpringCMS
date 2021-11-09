@@ -2,14 +2,16 @@ package pl.coderslab.SpringCMS.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.SpringCMS.dao.ArticleRepository;
-import pl.coderslab.SpringCMS.dao.AuthorRepository;
-import pl.coderslab.SpringCMS.dao.CategoryRepository;
+import pl.coderslab.SpringCMS.repository.ArticleRepository;
+import pl.coderslab.SpringCMS.repository.AuthorRepository;
+import pl.coderslab.SpringCMS.repository.CategoryRepository;
 import pl.coderslab.SpringCMS.entity.Article;
 import pl.coderslab.SpringCMS.entity.Author;
 import pl.coderslab.SpringCMS.entity.Category;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -35,7 +37,7 @@ public class ArticleController {
 
 
     @GetMapping("/all")
-    public String showAll(Model model) {
+    public String showAll(Model model ) {
         model.addAttribute("articles", articleRepository.findAll());
         return "/article/all";
     }
@@ -47,8 +49,10 @@ public class ArticleController {
     }
 
     @PostMapping("/add")
-    public String save(@ModelAttribute("article") Article article) {
-//        article.setCreated(LocalDateTime.now());
+    public String save(@ModelAttribute("article") @Valid Article article, BindingResult result) {
+        if(result.hasErrors()) {
+            return "/article/add";
+        }
         articleRepository.save(article);
         return "redirect:/article/all";
     }
@@ -60,14 +64,17 @@ public class ArticleController {
     }
 
     @PostMapping("/edit")
-    public String merge(@ModelAttribute("article") Article article) {
+    public String merge(@ModelAttribute("article") @Valid Article article, BindingResult result) {
+        if(result.hasErrors()) {
+            return "/article/add";
+        }
         articleRepository.save(article);
         return "redirect:/article/all";
     }
 
     @GetMapping("/remove")
     public String prepareToRemove(@RequestParam long id, Model model) {
-        model.addAttribute("article", articleRepository.findById(id));
+        model.addAttribute("article", articleRepository.getById(id));
         return "/article/remove";
     }
 

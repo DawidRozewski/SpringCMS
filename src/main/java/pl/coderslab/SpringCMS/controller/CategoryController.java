@@ -2,9 +2,12 @@ package pl.coderslab.SpringCMS.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.SpringCMS.dao.CategoryRepository;
+import pl.coderslab.SpringCMS.repository.CategoryRepository;
 import pl.coderslab.SpringCMS.entity.Category;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/category")
@@ -29,26 +32,32 @@ public class CategoryController {
     }
 
     @PostMapping("/add")
-    public String save(@ModelAttribute("category") Category category) {
+    public String save(@ModelAttribute("category") @Valid Category category, BindingResult result) {
+        if(result.hasErrors()) {
+            return "/category/add";
+        }
         categoryRepository.save(category);
         return "redirect:/category/all";
     }
 
     @GetMapping("/edit")
     public String prepareToEdit(@RequestParam long id, Model model) {
-        model.addAttribute("category", categoryRepository.findById(id));
+        model.addAttribute("category", categoryRepository.getById(id));
         return "category/addForm";
     }
 
     @PostMapping("/edit")
-    public String merge(@ModelAttribute("category") Category category) {
+    public String merge(@ModelAttribute("category") @Valid Category category, BindingResult result) {
+        if(result.hasErrors()) {
+            return "/category/edit";
+        }
         categoryRepository.save(category);
         return "redirect:/category/all";
     }
 
     @GetMapping("/remove")
     public String prepareToRemove(@RequestParam long id, Model model) {
-        model.addAttribute("category", categoryRepository.findById(id));
+        model.addAttribute("category", categoryRepository.getById(id));
         return "category/remove";
     }
 

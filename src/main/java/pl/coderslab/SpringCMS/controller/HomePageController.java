@@ -1,9 +1,7 @@
 package pl.coderslab.SpringCMS.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import pl.coderslab.SpringCMS.dao.ArticleRepository;
+import pl.coderslab.SpringCMS.repository.ArticleRepository;
 
 @Controller
 public class HomePageController {

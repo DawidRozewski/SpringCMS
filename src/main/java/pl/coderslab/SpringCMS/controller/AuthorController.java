@@ -3,7 +3,7 @@ package pl.coderslab.SpringCMS.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.SpringCMS.dao.AuthorRepository;
+import pl.coderslab.SpringCMS.repository.AuthorRepository;
 import pl.coderslab.SpringCMS.entity.Author;
 
 @Controller
@@ -36,7 +36,7 @@ public class AuthorController {
 
     @GetMapping("/edit")
     public String prepareToEdit(@RequestParam long id, Model model) {
-        model.addAttribute("author", authorRepository.findById(id));
+        model.addAttribute("author", authorRepository.getById(id));
         return "author/add";
     }
 
@@ -48,7 +48,7 @@ public class AuthorController {
 
     @GetMapping("/remove")
     public String prepareToRemove(@RequestParam long id, Model model) {
-        model.addAttribute("author", authorRepository.findById(id));
+        model.addAttribute("author", authorRepository.getById(id));
         return "author/remove";
     }
 

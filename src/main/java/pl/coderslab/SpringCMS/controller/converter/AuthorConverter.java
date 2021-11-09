@@ -2,7 +2,7 @@ package pl.coderslab.SpringCMS.controller.converter;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import pl.coderslab.SpringCMS.dao.AuthorRepository;
+import pl.coderslab.SpringCMS.repository.AuthorRepository;
 import pl.coderslab.SpringCMS.entity.Author;
 
 @Component
