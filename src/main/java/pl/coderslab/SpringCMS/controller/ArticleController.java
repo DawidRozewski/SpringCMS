@@ -1,36 +1,42 @@
 package pl.coderslab.SpringCMS.controller;
 
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.SpringCMS.dao.ArticleDao;
-import pl.coderslab.SpringCMS.dao.AuthorDao;
-import pl.coderslab.SpringCMS.dao.CategoryDao;
+import pl.coderslab.SpringCMS.dao.ArticleRepository;
+import pl.coderslab.SpringCMS.dao.AuthorRepository;
+import pl.coderslab.SpringCMS.dao.CategoryRepository;
 import pl.coderslab.SpringCMS.entity.Article;
 import pl.coderslab.SpringCMS.entity.Author;
 import pl.coderslab.SpringCMS.entity.Category;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
 @RequestMapping("/article")
 public class ArticleController {
 
-    private final ArticleDao articleDao;
-    private final CategoryDao categoryDao;
-    private final AuthorDao authorDao;
+    private final ArticleRepository articleRepository;
+    private final CategoryRepository categoryRepository;
+    private final AuthorRepository authorRepository;
 
-    public ArticleController(ArticleDao articleDao, CategoryDao categoryDao, AuthorDao authorDao) {
-        this.articleDao = articleDao;
-        this.categoryDao = categoryDao;
-        this.authorDao = authorDao;
+    public ArticleController(ArticleRepository articleRepository, CategoryRepository categoryRepository, AuthorRepository authorRepository) {
+        this.articleRepository = articleRepository;
+        this.categoryRepository = categoryRepository;
+        this.authorRepository = authorRepository;
     }
+
+    private List<String> list = Arrays.asList(
+            "Dawid",
+            "Milena",
+            "dupa");
+
 
     @GetMapping("/all")
     public String showAll(Model model) {
-        model.addAttribute("articles", articleDao.findAll());
+        model.addAttribute("articles", articleRepository.findAll());
         return "/article/all";
     }
 
@@ -43,32 +49,32 @@ public class ArticleController {
     @PostMapping("/add")
     public String save(@ModelAttribute("article") Article article) {
 //        article.setCreated(LocalDateTime.now());
-        articleDao.persist(article);
+        articleRepository.save(article);
         return "redirect:/article/all";
     }
 
     @GetMapping("/edit")
     public String prepareToEdit(@RequestParam long id, Model model) {
-        model.addAttribute("article", articleDao.findById(id));
+        model.addAttribute("article", articleRepository.findById(id));
         return "/article/add";
     }
 
     @PostMapping("/edit")
     public String merge(@ModelAttribute("article") Article article) {
-        articleDao.merge(article);
+        articleRepository.save(article);
         return "redirect:/article/all";
     }
 
     @GetMapping("/remove")
     public String prepareToRemove(@RequestParam long id, Model model) {
-        model.addAttribute("article", articleDao.findById(id));
+        model.addAttribute("article", articleRepository.findById(id));
         return "/article/remove";
     }
 
     @PostMapping("/remove")
     public String remove(@RequestParam String confirmed, @RequestParam long id) {
         if ("yes".equals(confirmed)) {
-            articleDao.remove(id);
+            articleRepository.deleteById(id);
         }
         return "redirect:/article/all";
     }
@@ -80,12 +86,12 @@ public class ArticleController {
 
     @ModelAttribute("authors")
     public List<Author> authorList() {
-        return authorDao.findAll();
+        return authorRepository.findAll();
     }
 
     @ModelAttribute("categories")
     public List<Category> categoryList() {
-        return categoryDao.findAll();
+        return categoryRepository.findAll();
     }
 
 }

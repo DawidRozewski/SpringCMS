@@ -3,24 +3,22 @@ package pl.coderslab.SpringCMS.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.SpringCMS.dao.CategoryDao;
+import pl.coderslab.SpringCMS.dao.CategoryRepository;
 import pl.coderslab.SpringCMS.entity.Category;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
 
-    private final CategoryDao categoryDao;
+    private final CategoryRepository categoryRepository;
 
-    public CategoryController(CategoryDao categoryDao) {
-        this.categoryDao = categoryDao;
+    public CategoryController(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
     }
 
     @GetMapping("/all")
     public String getAllCategories(Model model) {
-        model.addAttribute("categories", categoryDao.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "category/showAll";
     }
 
@@ -32,34 +30,33 @@ public class CategoryController {
 
     @PostMapping("/add")
     public String save(@ModelAttribute("category") Category category) {
-        categoryDao.persist(category);
+        categoryRepository.save(category);
         return "redirect:/category/all";
     }
 
     @GetMapping("/edit")
     public String prepareToEdit(@RequestParam long id, Model model) {
-        model.addAttribute("category", categoryDao.findById(id));
+        model.addAttribute("category", categoryRepository.findById(id));
         return "category/addForm";
     }
 
     @PostMapping("/edit")
     public String merge(@ModelAttribute("category") Category category) {
-        categoryDao.merge(category);
+        categoryRepository.save(category);
         return "redirect:/category/all";
     }
 
     @GetMapping("/remove")
     public String prepareToRemove(@RequestParam long id, Model model) {
-        model.addAttribute("category", categoryDao.findById(id));
+        model.addAttribute("category", categoryRepository.findById(id));
         return "category/remove";
     }
 
     @PostMapping("/remove")
     public String remove(@RequestParam String confirmed, @RequestParam long id) {
         if ("yes".equals(confirmed)) {
-            categoryDao.remove(id);
+            categoryRepository.deleteById(id);
         }
         return "redirect:/category/all";
     }
-
 }

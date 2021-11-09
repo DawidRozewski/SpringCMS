@@ -3,23 +3,23 @@ package pl.coderslab.SpringCMS.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.SpringCMS.dao.AuthorDao;
+import pl.coderslab.SpringCMS.dao.AuthorRepository;
 import pl.coderslab.SpringCMS.entity.Author;
 
 @Controller
 @RequestMapping("/author")
 public class AuthorController {
 
-    private final AuthorDao authorDao;
+    private final AuthorRepository authorRepository;
 
-    public AuthorController(AuthorDao authorDao) {
-        this.authorDao = authorDao;
+    public AuthorController(AuthorRepository authorRepository) {
+        this.authorRepository = authorRepository;
     }
 
     @GetMapping("/all")
     public String showAuthors(Model model) {
-        model.addAttribute("authors", authorDao.findAll());
-        return "author/all";
+        model.addAttribute("authors", authorRepository.findAll());
+        return "/author/all";
     }
 
     @GetMapping("/add")
@@ -30,32 +30,32 @@ public class AuthorController {
 
     @PostMapping("/add")
     public String save(@ModelAttribute("author") Author author) {
-        authorDao.persist(author);
+        authorRepository.save(author);
         return "redirect:/author/all";
     }
 
     @GetMapping("/edit")
     public String prepareToEdit(@RequestParam long id, Model model) {
-        model.addAttribute("author", authorDao.findById(id));
+        model.addAttribute("author", authorRepository.findById(id));
         return "author/add";
     }
 
     @PostMapping("/edit")
     public String merge(@ModelAttribute("author") Author author) {
-        authorDao.merge(author);
+        authorRepository.save(author);
         return "redirect:/author/all";
     }
 
     @GetMapping("/remove")
     public String prepareToRemove(@RequestParam long id, Model model) {
-        model.addAttribute("author", authorDao.findById(id));
+        model.addAttribute("author", authorRepository.findById(id));
         return "author/remove";
     }
 
     @PostMapping("/remove")
     public String remove(@RequestParam String confirmed, @RequestParam long id) {
         if ("yes".equals(confirmed)) {
-            authorDao.remove(id);
+            authorRepository.deleteById(id);
         }
         return "redirect:/author/all";
     }

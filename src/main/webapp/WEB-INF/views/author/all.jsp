@@ -13,8 +13,13 @@
             background-color: #ccc;
         }
     </style>
+    <style>
+        body {
+            background-image: url('/img/tooth.jpg');
+        }
+    </style>
 </head>
-
+<body>
 <table>
     <tr>
         <th>Id</th>
@@ -38,6 +43,7 @@
     <a href="/article/add">Add new article</a><br/></p>
     <a href="/author/add">Add new author</a><br/></p>
     <a href="/category/add">Add new category</a><br/></p>
+    <a href="/sendSMS/test">Send SMS</a><br/></p>
 
     <strong><a href="/article/all"> Articles </a> </strong><br/>
     <strong><a href="/category/all"> Categories </a> </strong><br/>
