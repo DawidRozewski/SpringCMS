@@ -8,7 +8,7 @@
     <form:errors path="name"/><br/>
 
     Description: <form:input path="description"/><br/>
-
+    <form:errors path="description"/><br/>
     <input type="submit" value="Zapisz"> <br/>
 </form:form>
 

@@ -20,9 +20,10 @@ public class Category {
     private long id;
 
     @Size(min = 5)
+    @NotBlank
     private String name;
 
-    @Nullable
+    @NotBlank
     private String description;
 
 }

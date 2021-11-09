@@ -2,9 +2,12 @@ package pl.coderslab.SpringCMS.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.SpringCMS.repository.AuthorRepository;
 import pl.coderslab.SpringCMS.entity.Author;
+
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/author")
@@ -29,7 +32,10 @@ public class AuthorController {
     }
 
     @PostMapping("/add")
-    public String save(@ModelAttribute("author") Author author) {
+    public String save(@ModelAttribute("author") @Valid Author author, BindingResult result) {
+       if(result.hasErrors()) {
+           return "/author/add";
+       }
         authorRepository.save(author);
         return "redirect:/author/all";
     }
@@ -41,7 +47,10 @@ public class AuthorController {
     }
 
     @PostMapping("/edit")
-    public String merge(@ModelAttribute("author") Author author) {
+    public String merge(@ModelAttribute("author") @Valid Author author, BindingResult result) {
+        if(result.hasErrors()) {
+            return "/author/add";
+        }
         authorRepository.save(author);
         return "redirect:/author/all";
     }

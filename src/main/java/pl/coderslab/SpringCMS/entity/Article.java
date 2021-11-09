@@ -21,7 +21,7 @@ public class Article {
 
     @Column(length = 200)
     @Size
-    @NotNull
+    @NotBlank
     private String title;
 
     @ManyToOne
@@ -32,7 +32,7 @@ public class Article {
     private List<Category> categories = new ArrayList<>();
 
     @Size(max = 500)
-    @NotNull
+    @NotBlank
     private String content;
 
     @CreationTimestamp

@@ -34,7 +34,7 @@ public class CategoryController {
     @PostMapping("/add")
     public String save(@ModelAttribute("category") @Valid Category category, BindingResult result) {
         if(result.hasErrors()) {
-            return "/category/add";
+            return "/category/addForm";
         }
         categoryRepository.save(category);
         return "redirect:/category/all";
