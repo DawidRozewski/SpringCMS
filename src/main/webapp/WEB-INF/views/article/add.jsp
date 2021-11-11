@@ -7,8 +7,14 @@
             color: red;
         }
     </style>
+    <style>
+        body {
+         background-image: url("/img/tooth.jpg");
+        }
+    </style>
 </head>
 
+<body>
 
 <form:form modelAttribute="article">
     <form:hidden path="id"/>
@@ -27,3 +33,4 @@
 
     <input type="submit" value="Save"><br/>
 </form:form>
+</body>
